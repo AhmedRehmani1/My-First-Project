@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>The Kinetic Vault - Discovery</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#1f1f26",
+                        "surface-dim": "#0e0e13",
+                        "primary-fixed-dim": "#00deec",
+                        "on-tertiary-fixed-variant": "#6d0061",
+                        "surface-variant": "#25252c",
+                        "on-secondary-fixed": "#3b00a0",
+                        "primary": "#8ff5ff",
+                        "error-container": "#a70138",
+                        "inverse-primary": "#006a71",
+                        "surface-container-lowest": "#000000",
+                        "outline": "#76747b",
+                        "tertiary-fixed-dim": "#ff68e3",
+                        "tertiary-dim": "#ff59e3",
+                        "on-error": "#490013",
+                        "tertiary": "#ff59e3",
+                        "primary-container": "#00eefc",
+                        "secondary-fixed": "#d8caff",
+                        "error-dim": "#d73357",
+                        "on-surface-variant": "#acaab1",
+                        "inverse-surface": "#fbf8ff",
+                        "secondary-fixed-dim": "#cabaff",
+                        "on-tertiary": "#42003a",
+                        "primary-dim": "#00deec",
+                        "on-error-container": "#ffb2b9",
+                        "background": "#0e0e13",
+                        "on-tertiary-container": "#1b0017",
+                        "surface": "#0e0e13",
+                        "primary-fixed": "#00eefc",
+                        "on-background": "#f8f5fd",
+                        "on-secondary": "#25006b",
+                        "on-secondary-fixed-variant": "#591bdc",
+                        "on-primary": "#005d63",
+                        "outline-variant": "#48474d",
+                        "on-surface": "#f8f5fd",
+                        "surface-container": "#19191f",
+                        "surface-bright": "#2c2b33",
+                        "on-primary-fixed": "#003f43",
+                        "surface-container-low": "#131318",
+                        "secondary-dim": "#7e51ff",
+                        "secondary": "#a68cff",
+                        "secondary-container": "#591adc",
+                        "on-tertiary-fixed": "#33002d",
+                        "tertiary-fixed": "#ff85e4",
+                        "inverse-on-surface": "#55545a",
+                        "error": "#ff6e84",
+                        "on-primary-container": "#005359",
+                        "tertiary-container": "#ff05e5",
+                        "on-primary-fixed-variant": "#005e64",
+                        "on-secondary-container": "#e4daff",
+                        "surface-container-highest": "#25252c",
+                        "surface-tint": "#8ff5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Manrope', sans-serif; }
+        .headline-font { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+    <nav class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-md shadow-2xl shadow-black/50 flex justify-between items-center px-12 py-4">
+        <div class="flex items-center gap-12">
+            <div class="text-2xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-[#8ff5ff] to-[#00eefc] headline-font cursor-pointer" onclick="resetFilters()">
+                The Kinetic Vault
+            </div>
+            <div class="hidden md:flex gap-8 font-['Space_Grotesk'] uppercase tracking-tight">
+                <a class="text-[#f8f5fd]/70 hover:text-[#f8f5fd] transition-colors hover:bg-[#1f1f26] rounded-lg px-3 py-1" href="#">Store</a>
+                <a class="text-[#f8f5fd]/70 hover:text-[#f8f5fd] transition-colors hover:bg-[#1f1f26] rounded-lg px-3 py-1" href="#">Library</a>
+                <a class="text-[#f8f5fd]/70 hover:text-[#f8f5fd] transition-colors hover:bg-[#1f1f26] rounded-lg px-3 py-1" href="#">Community</a>
+                <a class="text-[#f8f5fd]/70 hover:text-[#f8f5fd] transition-colors hover:bg-[#1f1f26] rounded-lg px-3 py-1" href="#">Support</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="relative group">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input id="searchInput" class="bg-surface-container-low border-none focus:ring-0 focus:border-b-2 border-primary text-sm rounded-md pl-10 pr-4 py-2 w-64 transition-all" placeholder="Search the vault..." type="text"/>
+            </div>
+            <div class="flex gap-4 items-center">
+                <button class="material-symbols-outlined text-[#f8f5fd]/70 hover:text-[#8ff5ff] active:scale-95 transition-all">shopping_cart</button>
+                <button class="material-symbols-outlined text-[#f8f5fd]/70 hover:text-[#8ff5ff] active:scale-95 transition-all">notifications</button>
+                <div class="h-8 w-8 rounded-full bg-surface-container-highest border border-outline-variant/20 overflow-hidden">
+                    <img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFXis0h5uWZB5CSTsp6YeipLxJ1xpuvYeAlxQCoDTJZr7hOeLB5UUOb8wXBn9i1t3wGG3Qw2qtOECUloFOTrmlgPH42o-rCqXN02zav5Z28mee43wApFxf6vLoOe4eJUdUJ_uz3zqu2YibtYHm0BQhRhlY3cJBLV2WVjjvuilRDMbN-NL-jZuWLzzPS9-aDT6NG7B_hJnXUxOtFJT4O_qVNbMUTqU7krlRDMQpPvfz4FyM-xYjxGS76i_6TcadHwgaD2w2qmC5TOML"/>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 pt-20">
+        <aside class="h-screen w-64 fixed left-0 top-0 pt-24 bg-[#131318] flex flex-col gap-2 font-['Manrope'] font-medium z-40 overflow-y-auto hide-scrollbar">
+            <div class="px-6 mb-4">
+                <h3 class="text-xs uppercase tracking-widest text-[#f8f5fd]/40 headline-font">Navigation</h3>
+                <p class="text-primary text-sm">Browse Vault</p>
+            </div>
+            <nav class="flex flex-col">
+                <a class="text-[#f8f5fd]/50 hover:text-[#f8f5fd] px-6 py-3 hover:bg-[#1f1f26] transition-all hover:translate-x-1 duration-200 flex items-center gap-3" href="#">
+                    <span class="material-symbols-outlined">home</span> Home
+                </a>
+                <a class="bg-gradient-to-r from-[#8ff5ff]/10 to-transparent text-[#8ff5ff] border-l-4 border-[#8ff5ff] px-6 py-3 flex items-center gap-3" href="#">
+                    <span class="material-symbols-outlined">explore</span> Discovery
+                </a>
+                <a class="text-[#f8f5fd]/50 hover:text-[#f8f5fd] px-6 py-3 hover:bg-[#1f1f26] transition-all hover:translate-x-1 duration-200 flex items-center gap-3" href="#">
+                    <span class="material-symbols-outlined">trending_up</span> Top Sellers
+                </a>
+                <a class="text-[#f8f5fd]/50 hover:text-[#f8f5fd] px-6 py-3 hover:bg-[#1f1f26] transition-all hover:translate-x-1 duration-200 flex items-center gap-3" href="#">
+                    <span class="material-symbols-outlined">fiber_new</span> New Releases
+                </a>
+                <a class="text-[#f8f5fd]/50 hover:text-[#f8f5fd] px-6 py-3 hover:bg-[#1f1f26] transition-all hover:translate-x-1 duration-200 flex items-center gap-3" href="#">
+                    <span class="material-symbols-outlined">favorite</span> Wishlist
+                </a>
+            </nav>
+            <div class="mt-8 px-6">
+                <h3 class="text-xs uppercase tracking-widest text-[#f8f5fd]/40 headline-font mb-4">Filters</h3>
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-xs text-on-surface-variant mb-3">Genre</p>
+                        <div id="genreFilters" class="flex flex-wrap gap-2">
+                            <!-- Genres will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-auto p-6">
+                <button onclick="openRedeemModal()" class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold py-3 rounded-xl active:scale-95 transition-transform flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">confirmation_number</span>
+                    Redeem Code
+                </button>
+            </div>
+        </aside>
+
+        <main class="ml-64 flex-1 px-12 py-8 bg-surface">
+            <header class="mb-12">
+                <div class="flex items-baseline gap-4 mb-2">
+                    <h1 class="text-5xl font-black headline-font tracking-tighter text-on-surface">DISCOVERY</h1>
+                    <span id="titleCount" class="text-tertiary font-bold headline-font text-xl">/ 0 TITLES</span>
+                </div>
+                <div class="flex gap-4">
+                    <select id="sortSelect" class="bg-surface-container-high rounded-xl text-xs text-on-surface-variant border-none focus:ring-0 py-2 px-4 cursor-pointer">
+                        <option>Sort by: Relevance</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+            </header>
+
+            <div id="featuredSection">
+                <!-- Featured game will be loaded here -->
+            </div>
+
+            <section id="gamesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                <!-- Games will be loaded here -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Redeem Modal -->
+    <div id="redeemModal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
+        <div class="bg-surface-container-high p-8 rounded-2xl w-full max-w-md border border-outline-variant/20">
+            <h2 class="text-2xl font-black headline-font mb-6 text-on-surface">REDEEM ARTIFACT</h2>
+            <input id="redeemKey" type="text" placeholder="KINETIC-XXX-XXX" class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary rounded-xl p-4 mb-6 text-on-surface font-mono"/>
+            <div class="flex gap-4">
+                <button onclick="closeRedeemModal()" class="flex-1 py-3 text-on-surface-variant font-bold hover:text-on-surface transition-colors">CANCEL</button>
+                <button onclick="redeemKey()" class="flex-1 bg-primary text-on-primary-fixed py-3 rounded-xl font-bold hover:brightness-110 transition-all">REDEEM</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full py-12 mt-auto bg-[#0e0e13] border-t border-[#f8f5fd]/10 font-['Manrope'] text-xs uppercase tracking-widest flex flex-col items-center justify-center gap-6">
+        <div class="font-['Space_Grotesk'] text-[#8ff5ff] text-xl font-black italic tracking-tighter">THE KINETIC VAULT</div>
+        <div class="flex gap-8">
+            <a class="text-[#f8f5fd]/40 hover:text-[#8ff5ff] transition-opacity" href="#">Terms of Service</a>
+            <a class="text-[#f8f5fd]/40 hover:text-[#8ff5ff] transition-opacity" href="#">Privacy</a>
+            <a class="text-[#f8f5fd]/40 hover:text-[#8ff5ff] transition-opacity" href="#">Cookie Policy</a>
+            <a class="text-[#f8f5fd]/40 hover:text-[#8ff5ff] transition-opacity" href="#">Support</a>
+        </div>
+        <p class="text-[#f8f5fd]/20">© 2024 THE KINETIC VAULT. UNLEASH THE VIRTUAL.</p>
+    </footer>
+
+    <script>
+        let currentGenre = 'All';
+        let searchQuery = '';
+        let currentSort = 'Sort by: Relevance';
+
+        async function fetchGames() {
+            const url = `/api/games?genre=${currentGenre}&search=${searchQuery}&sort=${currentSort}`;
+            const res = await fetch(url);
+            const games = await res.json();
+            renderGames(games);
+        }
+
+        async function fetchGenres() {
+            const res = await fetch('/api/genres');
+            const genres = await res.json();
+            renderGenres(genres);
+        }
+
+        function renderGenres(genres) {
+            const container = document.getElementById('genreFilters');
+            container.innerHTML = genres.map(genre => `
+                <span onclick="setGenre('${genre}')" class="px-3 py-1 ${currentGenre === genre ? 'bg-secondary-container text-on-secondary-container' : 'bg-surface-container-highest text-on-surface'} text-[10px] rounded-full cursor-pointer hover:shadow-[0_0_15px_rgba(143,245,255,0.3)] transition-all">
+                    ${genre}
+                </span>
+            `).join('');
+        }
+
+        function renderGames(games) {
+            document.getElementById('titleCount').innerText = `/ ${games.length} TITLES`;
+
+            const featuredGame = games.find(g => g.is_featured);
+            const featuredContainer = document.getElementById('featuredSection');
+
+            if (featuredGame && currentGenre === 'All' && !searchQuery) {
+                featuredContainer.innerHTML = `
+                    <div class="group relative overflow-hidden rounded-xl bg-surface-container-high cursor-pointer transition-all hover:scale-[1.02] mb-8 aspect-[21/9]">
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent z-10"></div>
+                        <img class="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" src="${featuredGame.image_url}"/>
+                        <div class="absolute bottom-0 left-0 p-8 z-20 w-full">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase tracking-widest">Featured</span>
+                                <span class="text-primary text-xs font-bold headline-font tracking-wider">${featuredGame.genre.toUpperCase()}</span>
+                            </div>
+                            <h2 class="text-4xl font-black headline-font tracking-tighter text-on-surface mb-4">${featuredGame.title}</h2>
+                            <div class="flex justify-between items-end">
+                                <p class="text-on-surface-variant text-sm max-w-xs">${featuredGame.description}</p>
+                                <div class="text-right">
+                                    ${featuredGame.price < featuredGame.original_price ? `<span class="block text-on-surface-variant line-through text-xs">$${featuredGame.original_price}</span>` : ''}
+                                    <span class="text-2xl font-black text-primary headline-font">${featuredGame.price === 0 ? 'FREE' : '$' + featuredGame.price}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                featuredContainer.innerHTML = '';
+            }
+
+            const otherGames = (featuredGame && currentGenre === 'All' && !searchQuery) ? games.filter(g => g.id !== featuredGame.id) : games;
+            const grid = document.getElementById('gamesGrid');
+            grid.innerHTML = otherGames.map(game => `
+                <div class="group relative overflow-hidden rounded-xl bg-surface-container-high cursor-pointer transition-all hover:scale-[1.02]">
+                    <div class="h-64 relative overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${game.image_url}"/>
+                        ${game.is_new ? '<div class="absolute top-4 left-4"><span class="px-2 py-1 bg-primary text-on-primary-fixed text-[10px] font-bold rounded uppercase">New</span></div>' : ''}
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold headline-font text-on-surface">${game.title}</h3>
+                            <span class="${game.price < game.original_price ? 'text-tertiary-dim' : 'text-primary-fixed-dim'} text-xs font-bold">
+                                ${game.price === 0 ? 'FREE' : (game.price < game.original_price ? 'SALE $' + game.price : '$' + game.price)}
+                            </span>
+                        </div>
+                        <p class="text-xs text-on-surface-variant mb-4">${game.genre}</p>
+                        <div class="flex gap-2">
+                            ${JSON.parse(game.platforms).map(p => `<span class="px-2 py-0.5 bg-surface-container-highest text-[10px] rounded">${p}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setGenre(genre) {
+            currentGenre = genre;
+            fetchGames();
+            fetchGenres();
+        }
+
+        function resetFilters() {
+            currentGenre = 'All';
+            searchQuery = '';
+            currentSort = 'Sort by: Relevance';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('sortSelect').value = currentSort;
+            fetchGames();
+            fetchGenres();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            fetchGames();
+        });
+
+        document.getElementById('sortSelect').addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            fetchGames();
+        });
+
+        function openRedeemModal() {
+            document.getElementById('redeemModal').classList.remove('hidden');
+        }
+
+        function closeRedeemModal() {
+            document.getElementById('redeemModal').classList.add('hidden');
+        }
+
+        async function redeemKey() {
+            const key = document.getElementById('redeemKey').value;
+            const res = await fetch('/api/redeem', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key })
+            });
+            const data = await res.json();
+            if (data.error) {
+                alert(data.error);
+            } else {
+                alert(`SUCCESS! You have redeemed: ${data.game.title}`);
+                closeRedeemModal();
+            }
+        }
+
+        // Initial Load
+        fetchGames();
+        fetchGenres();
+    </script>
+</body>
+</html>
